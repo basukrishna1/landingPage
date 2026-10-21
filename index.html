@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f4eee4">
+  <title>A little something for you</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas id="ambientCanvas" aria-hidden="true"></canvas>
+  <div class="paper-grain" aria-hidden="true"></div>
+<main class="site-shell">
+    <section id="welcome" class="screen welcome-screen">
+      <header class="topline"><span>THE MEMORY ARCHIVE</span><span>A COLLECTION OF GOOD THINGS</span></header>
+      <div class="hero-layout">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="sparkle">✳</span> A birthday, made personal</p>
+          <h1>A life full of<br><em>little wonders.</em></h1>
+          <p class="lede">A birthday experience made from photographs, stories, tiny surprises, and all the things that make you unmistakably you.</p>
+          <button id="beginBtn" class="button button-primary">Come on in <span>↗</span></button>
+        </div>
+        <div class="hero-art" aria-label="Illustration of a birthday cake with candles">
+          <div class="halo halo-a"></div><div class="halo halo-b"></div>
+          <div class="floating-star star-a">✳</div><div class="floating-star star-b">✧</div><div class="floating-star star-c">✦</div>
+          <div class="cake-scene">
+            <div class="candle candle-one"><i></i></div><div class="candle candle-two"><i></i></div><div class="candle candle-three"><i></i></div>
+            <div class="cake-top"></div><div class="cake-body"><div class="icing"></div><div class="cake-dot dot-one"></div><div class="cake-dot dot-two"></div><div class="cake-dot dot-three"></div><div class="cake-dot dot-four"></div></div>
+            <div class="cake-plate"></div>
+          </div>
+          <span class="art-caption">PHOTOS · STORIES · THE GOOD STUFF</span>
+        </div>
+      </div>
+      <footer class="bottomline"><span>MADE WITH LOVE, OBVIOUSLY</span><span>OPEN WHENEVER YOU NEED A REMINDER</span></footer>
+    </section>
+
+    <section id="game" class="screen game-screen hidden">
+      <div class="section-heading">
+        <p class="eyebrow">A tiny trip down memory lane</p>
+        <h2>A small game,<br><em>then the memories.</em></h2>
+        <p>Match the cards to unlock your birthday experience. One little game, then the whole collection is yours.</p>
+      </div>
+      <div id="memoryGrid" class="memory-grid" aria-label="Memory matching game"></div>
+      <div class="game-meta"><span id="moves">MOVES 00</span><span id="pairs">PAIRS 00 / 06</span></div>
+      <p id="gameMessage" class="game-message" aria-live="polite">Turn over two cards. Trust your instincts.</p>
+      <button id="openBookBtn" class="button button-primary hidden">You did it — open your book <span>↗</span></button>
+    </section>
+
+    <section id="bookSection" class="screen book-screen hidden">
+      <header class="book-header">
+        <div><p class="eyebrow">THE BIRTHDAY ARCHIVE</p><h2>A few things worth <em>keeping.</em></h2></div>
+        <div class="page-counter"><span id="pageNumber">01</span><span class="counter-line"></span><span>06</span></div>
+      </header>
+      <p class="swipe-hint"><span>↔</span> Swipe to turn the pages, or use the arrows</p>
+      <div class="book-stage">
+        <button id="prevPage" class="page-arrow prev" aria-label="Previous page" disabled>←</button>
+        <div id="book" class="book" aria-label="Interactive scrapbook">
+          <article class="book-page page-cover active" data-page="0">
+            <div class="cover-inner">
+              <div class="cover-kicker">A PERSONAL ARCHIVE</div><div class="cover-rule"></div>
+              <h3>The things<br>we <em>keep.</em></h3>
+              <p>Photographs, stories<br>& other little reminders.</p>
+              <div class="cover-stamp">MADE<br>FOR YOU</div>
+              <div class="cover-footer"><span>A BIRTHDAY COLLECTION</span><span>TURN THE PAGE ↗</span></div>
+            </div>
+          </article>
+          <article class="book-page" data-page="1">
+            <div class="page-top"><span>01 / THE BEGINNING</span><span>✳</span></div>
+            <h3>Somehow,<br>we became <em>us.</em></h3>
+            <div class="photo-frame large-photo">
+              <img src="images/photo-1.jpg" alt="A favourite memory together" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
+              <div class="photo-placeholder"><span>ADD A PHOTO</span><small>images/photo-1.jpg</small></div>
+              <span class="photo-caption">one of the good days</span>
+            </div>
+            <p class="body-copy">If someone had told me this friendship would become one of my constants, I probably would’ve believed them. You have a way of making ordinary days feel like stories I’ll want to tell again.</p>
+            <div class="page-foot"><span>THE GOOD OLD DAYS</span><span>02</span></div>
+          </article>
+          <article class="book-page" data-page="2">
+            <div class="page-top"><span>02 / THE EVIDENCE</span><span>✳</span></div>
+            <h3>Proof that we<br>have <em>excellent taste.</em></h3>
+            <div class="photo-grid">
+              <div class="photo-frame tilted-left"><img src="images/photo-2.jpg" alt="A favourite shared photo" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><div class="photo-placeholder"><span>ADD A PHOTO</span><small>images/photo-2.jpg</small></div><span class="photo-caption">no context needed</span></div>
+              <div class="photo-frame tilted-right"><img src="images/photo-3.jpg" alt="Another favourite memory" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><div class="photo-placeholder"><span>ADD A PHOTO</span><small>images/photo-3.jpg</small></div><span class="photo-caption">we were there</span></div>
+            </div>
+            <blockquote>“The best memories rarely look important while you’re making them.”</blockquote>
+            <p class="body-copy">The blurry photos, the long conversations, the jokes that stopped being funny to everyone else years ago. Especially those.</p>
+            <div class="page-foot"><span>THE USUAL NONSENSE</span><span>03</span></div>
+          </article>
+          <article class="book-page" data-page="3">
+            <div class="page-top"><span>03 / A FEW THINGS</span><span>✳</span></div>
+            <h3>Things I hope<br>you <em>never forget.</em></h3>
+            <div class="note-list">
+              <div><span>01</span><p>You make people feel seen. That’s rarer than you think.</p></div>
+              <div><span>02</span><p>You’re allowed to change your mind, start over, and take the scenic route.</p></div>
+              <div><span>03</span><p>You don’t need to have everything figured out. Life isn't a deadline.</p></div>
+              <div><span>04</span><p>You are loved on your impressive days and your doing-absolutely-nothing days.</p></div>
+            </div>
+            <div class="page-foot"><span>PLEASE KEEP THIS PAGE</span><span>04</span></div>
+          </article>
+          <article class="book-page" data-page="4">
+            <div class="page-top"><span>04 / TURN IT OVER</span><span>✳</span></div>
+            <h3>Little notes,<br>with <em>big feelings.</em></h3>
+            <p class="body-copy intro-copy">Tap each photograph. There's something on the other side.</p>
+            <div class="polaroid-row">
+              <button class="polaroid" aria-label="Flip photo one"><span class="polaroid-inner"><span class="polaroid-front"><img src="images/photo-1.jpg" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><span class="photo-placeholder"><span>PHOTO</span><small>photo-1.jpg</small></span><span class="polaroid-caption">the lore</span></span><span class="polaroid-back">Thank you for being one of the people I can always come back to.<small>— a thing I mean</small></span></span></button>
+              <button class="polaroid" aria-label="Flip photo two"><span class="polaroid-inner"><span class="polaroid-front"><img src="images/photo-2.jpg" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><span class="photo-placeholder"><span>PHOTO</span><small>photo-2.jpg</small></span><span class="polaroid-caption">the laughter</span></span><span class="polaroid-back">Life is genuinely better with you in it. That's the whole note.<small>— no footnotes</small></span></span></button>
+              <button class="polaroid" aria-label="Flip photo three"><span class="polaroid-inner"><span class="polaroid-front"><img src="images/photo-3.jpg" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><span class="photo-placeholder"><span>PHOTO</span><small>photo-3.jpg</small></span><span class="polaroid-caption">the memories</span></span><span class="polaroid-back">Here's to more trips, more terrible ideas, and more years of choosing this friendship.<small>— to what's next</small></span></span></button>
+            </div>
+            <div class="tap-note">TAP A PHOTO TO FLIP IT ↻</div>
+            <div class="page-foot"><span>READ THE BACKS</span><span>05</span></div>
+          </article>
+          <article class="book-page" data-page="5">
+            <div class="final-page">
+              <p class="eyebrow">05 / YOUR NEXT CHAPTER</p><div class="final-mark">✳</div>
+              <h3>May this year<br>feel like <em>you.</em></h3>
+              <p class="body-copy">More peace than pressure. More moments that make you forget to check your phone. Work that means something, people who show up, and the courage to want what you really want.</p>
+              <p class="body-copy">I hope the year ahead surprises you in all the right ways. And when it doesn't, I hope you remember you don't have to figure it all out alone.</p>
+              <p class="signature">Happy birthday, you.<br><span>I'm always in your corner.</span></p>
+              <div class="page-foot"><span>END OF VOLUME ONE</span><span>06</span></div>
+            </div>
+          </article>
+        </div>
+        <button id="nextPage" class="page-arrow next" aria-label="Next page">→</button>
+      </div>
+      <div class="book-controls"><button id="prevText" class="text-control" disabled>← Previous</button><span>TAKE YOUR TIME</span><button id="nextText" class="text-control">Next page →</button></div>
+      <p id="bookHint" class="book-hint" aria-live="polite">A little archive, made just for you.</p>
+    </section>
+
+    <section id="gallerySection" class="screen gallery-screen hidden">
+      <header class="gallery-header">
+        <p class="eyebrow">05 / THE PHOTO WALL</p>
+        <h2>Little moments.<br><em>Long stories.</em></h2>
+        <p>Because a few pages could never hold every memory. Add as many photographs as you like.</p>
+      </header>
+      <div class="letter-photo-spread">
+        <article class="birthday-letter">
+          <div class="letter-postmark">A LITTLE LETTER · JUST FOR YOU</div>
+          <span class="bear-sticker bear-one" aria-label="cute bear sticker">🐻</span>
+          <span class="bear-sticker bear-two" aria-label="cute bear sticker">🤍</span>
+          <h3>To my favourite<br><em>human,</em></h3>
+          <p>Happy birthday, you. I hope today reminds you how loved you are—not just for what you do, but for exactly who you are.</p>
+          <p>I've tucked little pieces of us in here: the photos, the chaos, the tiny moments that probably seemed ordinary then but mean a lot to me now. I wish I could put every laugh and every good memory in an envelope and hand it to you.</p>
+          <p>So here's a little reminder for the year ahead: keep choosing what makes you feel alive, be gentle with yourself, and never forget there's someone cheering for you in your corner.</p>
+          <p class="letter-signoff">All my love, always,<br><span>your person ✳</span></p>
+          <div class="letter-stamp">OPEN<br>WITH<br>LOVE</div>
+        </article>
+        <aside class="letter-photo-stack" aria-label="Favourite photos beside the birthday letter">
+          <div class="letter-photo polaroid-a"><img src="images/photo-4.jpg" alt="A favourite memory" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><div class="wall-placeholder"><span>ADD A PHOTO</span><small>images/photo-4.jpg</small></div><figcaption>my kind of happy</figcaption></div>
+          <div class="letter-photo polaroid-b"><img src="images/photo-5.jpg" alt="Another favourite memory" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><div class="wall-placeholder"><span>ADD A PHOTO</span><small>images/photo-5.jpg</small></div><figcaption>you + me + the lore</figcaption></div>
+          <span class="bear-doodle" aria-hidden="true">ʕ•ᴥ•ʔ</span>
+          <span class="tiny-heart" aria-hidden="true">♡</span>
+        </aside>
+      </div>
+      <div id="photoWall" class="photo-wall">
+        <figure class="wall-polaroid"><img src="images/photo-4.jpg" alt="Memory photo 4" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><div class="wall-placeholder"><span>ADD PHOTO 04</span><small>images/photo-4.jpg</small></div><figcaption>the kind of day you remember</figcaption></figure>
+        <figure class="wall-polaroid"><img src="images/photo-5.jpg" alt="Memory photo 5" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><div class="wall-placeholder"><span>ADD PHOTO 05</span><small>images/photo-5.jpg</small></div><figcaption>one for the archives</figcaption></figure>
+        <figure class="wall-polaroid"><img src="images/photo-6.jpg" alt="Memory photo 6" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><div class="wall-placeholder"><span>ADD PHOTO 06</span><small>images/photo-6.jpg</small></div><figcaption>zero regrets, probably</figcaption></figure>
+        <figure class="wall-polaroid"><img src="images/photo-7.jpg" alt="Memory photo 7" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><div class="wall-placeholder"><span>ADD PHOTO 07</span><small>images/photo-7.jpg</small></div><figcaption>one of my favourites</figcaption></figure>
+        <figure class="wall-polaroid"><img src="images/photo-8.jpg" alt="Memory photo 8" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><div class="wall-placeholder"><span>ADD PHOTO 08</span><small>images/photo-8.jpg</small></div><figcaption>the little things</figcaption></figure>
+        <figure class="wall-polaroid"><img src="images/photo-9.jpg" alt="Memory photo 9" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><div class="wall-placeholder"><span>ADD PHOTO 09</span><small>images/photo-9.jpg</small></div><figcaption>more where this came from</figcaption></figure>
+      </div>
+      <div class="gallery-actions"><button id="galleryBack" class="button">← Back to scrapbook</button><button id="galleryNext" class="button button-primary">One last thing <span>↗</span></button></div>
+    </section>
+
+    <section id="memoryCapsule" class="screen capsule-screen hidden">
+      <div class="capsule-card">
+        <p class="eyebrow">06 / OPEN WHENEVER</p>
+        <div class="capsule-icon">✳</div>
+        <h2>A note for the<br><em>days in between.</em></h2>
+        <p class="capsule-intro">Not every birthday needs a grand lesson. Sometimes it helps to keep a few good words nearby.</p>
+        <div class="capsule-note">
+          <span class="note-date">A NOTE TO KEEP</span>
+          <p>You don't have to turn every year into a transformation. You can grow quietly, change your mind, rest, try again, and take your time. I hope this next chapter gives you more reasons to feel at home in your own life—and plenty of people who make it lighter along the way.</p>
+          <span class="note-signoff">With love, always.</span>
+        </div>
+        <button id="capsuleCelebrate" class="button button-primary">Celebrate one more time <span>✦</span></button>
+      </div>
+    </section>
+
+    <footer class="site-footer"><span>THE MEMORY ARCHIVE</span><span>MADE FOR SOMEONE SPECIAL</span></footer>
+  </main>
+
+  <div id="birthdayOverlay" class="birthday-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="birthdayTitle">
+    <div class="birthday-card">
+      <button id="closeBirthday" class="close-birthday" aria-label="Close birthday celebration">×</button>
+      <p class="eyebrow">A LITTLE BIRTHDAY MOMENT</p>
+      <h2 id="birthdayTitle">Make a <em>wish.</em></h2>
+      <p class="birthday-intro">A little sparkle for your special day.</p>
+      <div class="candle-scene" id="candleScene">
+        <div class="candle-flames"><span class="flame flame-a"></span><span class="flame flame-b"></span><span class="flame flame-c"></span></div>
+        <div class="big-candles"><span class="big-candle"><i></i></span><span class="big-candle"><i></i></span><span class="big-candle"><i></i></span></div>
+        <div class="big-cake"><div class="big-icing"></div><div class="sprinkles">· ✦ · ✧ · ✦ ·</div></div>
+        <div class="big-plate"></div>
+      </div>
+      <p id="candlePrompt" class="candle-prompt">Tap the candles to blow them out.</p>
+      <button id="blowCandlesBtn" class="button button-primary">Blow out the candles ✨</button>
+      <p id="wishMessage" class="wish-message hidden">Wish made. May the good things find you. ✨</p>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
