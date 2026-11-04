@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#f4eee4">
-  <title>A little something for you</title>
+  <title>A Little Something for You · The Memory Archive</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -102,9 +102,9 @@
             <h3>Little notes,<br>with <em>big feelings.</em></h3>
             <p class="body-copy intro-copy">Tap each photograph. There's something on the other side.</p>
             <div class="polaroid-row">
-              <button class="polaroid" aria-label="Flip photo one"><span class="polaroid-inner"><span class="polaroid-front"><img src="images/photo-1.jpg" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><span class="photo-placeholder"><span>PHOTO</span><small>photo-1.jpg</small></span><span class="polaroid-caption">the lore</span></span><span class="polaroid-back">Thank you for being one of the people I can always come back to.<small>— a thing I mean</small></span></span></button>
-              <button class="polaroid" aria-label="Flip photo two"><span class="polaroid-inner"><span class="polaroid-front"><img src="images/photo-2.jpg" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><span class="photo-placeholder"><span>PHOTO</span><small>photo-2.jpg</small></span><span class="polaroid-caption">the laughter</span></span><span class="polaroid-back">Life is genuinely better with you in it. That's the whole note.<small>— no footnotes</small></span></span></button>
-              <button class="polaroid" aria-label="Flip photo three"><span class="polaroid-inner"><span class="polaroid-front"><img src="images/photo-3.jpg" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><span class="photo-placeholder"><span>PHOTO</span><small>photo-3.jpg</small></span><span class="polaroid-caption">the memories</span></span><span class="polaroid-back">Here's to more trips, more terrible ideas, and more years of choosing this friendship.<small>— to what's next</small></span></span></button>
+              <button class="polaroid" aria-label="Flip photo one"><span class="polaroid-inner"><span class="polaroid-front"><img src="images/photo-10.jpg" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><span class="photo-placeholder"><span>PHOTO</span><small>photo-1.jpg</small></span><span class="polaroid-caption">the lore</span></span><span class="polaroid-back">Thank you for being one of the people I can always come back to.<small>— a thing I mean</small></span></span></button>
+              <button class="polaroid" aria-label="Flip photo two"><span class="polaroid-inner"><span class="polaroid-front"><img src="images/photo-12.jpg" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><span class="photo-placeholder"><span>PHOTO</span><small>photo-2.jpg</small></span><span class="polaroid-caption">the laughter</span></span><span class="polaroid-back">Life is genuinely better with you in it. That's the whole note.<small>— no footnotes</small></span></span></button>
+              <button class="polaroid" aria-label="Flip photo three"><span class="polaroid-inner"><span class="polaroid-front"><img src="images/photo-13.jpg" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><span class="photo-placeholder"><span>PHOTO</span><small>photo-3.jpg</small></span><span class="polaroid-caption">the memories</span></span><span class="polaroid-back">Here's to more trips, more terrible ideas, and more years of choosing this friendship.<small>— to what's next</small></span></span></button>
             </div>
             <div class="tap-note">TAP A PHOTO TO FLIP IT ↻</div>
             <div class="page-foot"><span>READ THE BACKS</span><span>05</span></div>
@@ -126,6 +126,29 @@
       <p id="bookHint" class="book-hint" aria-live="polite">A little archive, made just for you.</p>
     </section>
 
+
+    <section id="secondGame" class="screen second-game-screen hidden">
+      <div class="section-heading">
+        <p class="eyebrow">THE BIRTHDAY ARCADE</p>
+        <h2>Catch the<br><em>birthday treats!</em></h2>
+        <p>Move your little basket and catch 12 treats before the timer runs out. Watch out for the cheeky bombs!</p>
+      </div>
+      <div class="catch-status">
+        <span id="catchScore">CAUGHT 00 / 12</span>
+        <span id="catchTime">TIME 25s</span>
+        <span id="catchLives">LIVES ♥ ♥ ♥</span>
+      </div>
+      <div id="catchArena" class="catch-arena" aria-label="Catch falling birthday treats game">
+        <div class="arena-skyline" aria-hidden="true">✦　✧　♡　✦　✧</div>
+        <div id="catchItems" class="catch-items"></div>
+        <div id="catchBasket" class="catch-basket" aria-hidden="true">🧺</div>
+      </div>
+      <p id="catchMessage" class="game-message" aria-live="polite">Drag your basket or move your finger. Catch cupcakes, hearts and stars!</p>
+      <button id="startCatchBtn" class="button button-primary" type="button">Start the game ✦</button>
+      <button id="openGalleryBtn" class="button button-primary hidden" type="button">You won — unlock the photo gallery <span>↗</span></button>
+      <button id="backToBookFromGame" class="text-control second-game-back" type="button">← Back to scrapbook</button>
+    </section>
+
     <section id="gallerySection" class="screen gallery-screen hidden">
       <header class="gallery-header">
         <p class="eyebrow">05 / THE PHOTO WALL</p>
@@ -141,12 +164,12 @@
           <p>Happy birthday, you. I hope today reminds you how loved you are—not just for what you do, but for exactly who you are.</p>
           <p>I've tucked little pieces of us in here: the photos, the chaos, the tiny moments that probably seemed ordinary then but mean a lot to me now. I wish I could put every laugh and every good memory in an envelope and hand it to you.</p>
           <p>So here's a little reminder for the year ahead: keep choosing what makes you feel alive, be gentle with yourself, and never forget there's someone cheering for you in your corner.</p>
-          <p class="letter-signoff">All my love, always,<br><span>your person ✳</span></p>
+          <p class="letter-signoff">All my love, always,<br><span>Basu ✳</span></p>
           <div class="letter-stamp">OPEN<br>WITH<br>LOVE</div>
         </article>
         <aside class="letter-photo-stack" aria-label="Favourite photos beside the birthday letter">
           <div class="letter-photo polaroid-a"><img src="images/photo-4.jpg" alt="A favourite memory" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><div class="wall-placeholder"><span>ADD A PHOTO</span><small>images/photo-4.jpg</small></div><figcaption>my kind of happy</figcaption></div>
-          <div class="letter-photo polaroid-b"><img src="images/photo-5.jpg" alt="Another favourite memory" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><div class="wall-placeholder"><span>ADD A PHOTO</span><small>images/photo-5.jpg</small></div><figcaption>you + me + the lore</figcaption></div>
+          <div class="letter-photo polaroid-b"><img src="images/photo-11.jpg" alt="Another favourite memory" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><div class="wall-placeholder"><span>ADD A PHOTO</span><small>images/photo-5.jpg</small></div><figcaption>you + me + the lore</figcaption></div>
           <span class="bear-doodle" aria-hidden="true">ʕ•ᴥ•ʔ</span>
           <span class="tiny-heart" aria-hidden="true">♡</span>
         </aside>
@@ -173,7 +196,7 @@
           <p>You don't have to turn every year into a transformation. You can grow quietly, change your mind, rest, try again, and take your time. I hope this next chapter gives you more reasons to feel at home in your own life—and plenty of people who make it lighter along the way.</p>
           <span class="note-signoff">With love, always.</span>
         </div>
-        <button id="capsuleCelebrate" class="button button-primary">Celebrate one more time <span>✦</span></button>
+        <button id="capsuleCelebrate" class="button button-primary">The final surprise — make a wish <span>✦</span></button>
       </div>
     </section>
 
@@ -183,7 +206,7 @@
   <div id="birthdayOverlay" class="birthday-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="birthdayTitle">
     <div class="birthday-card">
       <button id="closeBirthday" class="close-birthday" aria-label="Close birthday celebration">×</button>
-      <p class="eyebrow">A LITTLE BIRTHDAY MOMENT</p>
+      <p class="eyebrow">THE VERY LAST SURPRISE</p>
       <h2 id="birthdayTitle">Make a <em>wish.</em></h2>
       <p class="birthday-intro">A little sparkle for your special day.</p>
       <div class="candle-scene" id="candleScene">
@@ -192,7 +215,7 @@
         <div class="big-cake"><div class="big-icing"></div><div class="sprinkles">· ✦ · ✧ · ✦ ·</div></div>
         <div class="big-plate"></div>
       </div>
-      <p id="candlePrompt" class="candle-prompt">Tap the candles to blow them out.</p>
+      <p id="candlePrompt" class="candle-prompt">Make a wish, then blow out your candles.</p>
       <button id="blowCandlesBtn" class="button button-primary">Blow out the candles ✨</button>
       <p id="wishMessage" class="wish-message hidden">Wish made. May the good things find you. ✨</p>
     </div>

@@ -7,12 +7,15 @@ const FRIEND_NAME = "YOUR FRIEND";
 // This is intentionally a client-side convenience, NOT security or access control.
 // Remove this override before sharing if you want everyone to play the game first.
 const QA_SKIP_GAME = new URLSearchParams(window.location.search).get("skipGame") === "1";
+const QA_SKIP_CATCH_GAME =
+  new URLSearchParams(window.location.search).get("skipCatch") === "1";
 
 const PAIRS = ["✦", "☾", "♧", "✷", "◇", "♡"];
 const welcome = document.getElementById("welcome");
 const game = document.getElementById("game");
 const bookSection = document.getElementById("bookSection");
 const gallerySection = document.getElementById("gallerySection");
+const secondGame = document.getElementById("secondGame");
 const capsuleSection = document.getElementById("memoryCapsule");
 const memoryGrid = document.getElementById("memoryGrid");
 const movesLabel = document.getElementById("moves");
@@ -21,7 +24,7 @@ const gameMessage = document.getElementById("gameMessage");
 const openBookBtn = document.getElementById("openBookBtn");
 
 function showScreen(screen) {
-  [welcome, game, bookSection, gallerySection, capsuleSection].forEach(el => el.classList.add("hidden"));
+  [welcome, game, bookSection, secondGame, gallerySection, capsuleSection].forEach(el => el.classList.add("hidden"));
   screen.classList.remove("hidden");
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
@@ -138,6 +141,112 @@ book.addEventListener("touchend", e => {
 }, { passive: true });
 document.querySelectorAll(".polaroid").forEach(card => card.addEventListener("click", () => card.classList.toggle("flipped")));
 
+
+// GAME TWO: catch falling birthday treats to unlock the photo gallery.
+const catchArena = document.getElementById("catchArena");
+const catchItems = document.getElementById("catchItems");
+const catchBasket = document.getElementById("catchBasket");
+const catchScoreLabel = document.getElementById("catchScore");
+const catchTimeLabel = document.getElementById("catchTime");
+const catchLivesLabel = document.getElementById("catchLives");
+const catchMessage = document.getElementById("catchMessage");
+const startCatchBtn = document.getElementById("startCatchBtn");
+const openGalleryBtn = document.getElementById("openGalleryBtn");
+const CATCH_TARGET = 12;
+let caught = 0, lives = 3, secondsLeft = 25, catchRunning = false, catchWon = false;
+let basketX = 50, falling = [], lastSpawn = 0, lastFrame = 0, gameFrame = 0, clockTick = 0;
+
+function updateCatchHud() {
+  catchScoreLabel.textContent = `CAUGHT ${String(caught).padStart(2, "0")} / ${CATCH_TARGET}`;
+  catchTimeLabel.textContent = `TIME ${secondsLeft}s`;
+  catchLivesLabel.textContent = `LIVES ${"♥ ".repeat(lives).trim() || "—"}`;
+}
+function moveBasket(clientX) {
+  const rect = catchArena.getBoundingClientRect();
+  basketX = Math.max(9, Math.min(91, ((clientX - rect.left) / rect.width) * 100));
+  catchBasket.style.left = `${basketX}%`;
+}
+catchArena.addEventListener("pointermove", e => { if (catchRunning) moveBasket(e.clientX); });
+catchArena.addEventListener("pointerdown", e => { if (catchRunning) { catchArena.setPointerCapture?.(e.pointerId); moveBasket(e.clientX); } });
+function spawnCatchItem() {
+  const isBomb = Math.random() < .2;
+  const symbols = ["🧁", "💖", "⭐", "🍓", "🍬", "🎁"];
+  const el = document.createElement("span");
+  el.className = `catch-item ${isBomb ? "catch-bomb" : ""}`;
+  el.textContent = isBomb ? "💣" : symbols[Math.floor(Math.random() * symbols.length)];
+  const item = {el, x: 7 + Math.random() * 86, y: -8, speed: 0.23 + Math.random() * 0.13, bomb: isBomb, caught: false};
+  el.style.left = `${item.x}%`;
+  catchItems.appendChild(el);
+  falling.push(item);
+}
+function finishCatch(won) {
+  catchRunning = false;
+  cancelAnimationFrame(gameFrame);
+  clearInterval(clockTick);
+  catchWon = won;
+  if (won) {
+    catchMessage.textContent = "A perfect catch! You earned your photo-wall pass. 🎉";
+    openGalleryBtn.classList.remove("hidden");
+    launchConfetti(110);
+  } else {
+    catchMessage.textContent = lives <= 0 ? "Oh no, the bombs got you! Give it another go." : "Time's up! You were so close — try once more.";
+    startCatchBtn.textContent = "Play again ↻";
+    startCatchBtn.classList.remove("hidden");
+  }
+}
+function resetCatch() {
+  caught = 0; lives = 3; secondsLeft = 25; basketX = 50; falling = [];
+  catchItems.innerHTML = ""; catchBasket.style.left = "50%";
+  catchWon = false; openGalleryBtn.classList.add("hidden");
+  updateCatchHud();
+}
+function catchLoop(now) {
+  if (!catchRunning) return;
+  const dt = Math.min(40, now - (lastFrame || now)); lastFrame = now;
+  lastSpawn += dt;
+  if (lastSpawn > 620) { spawnCatchItem(); lastSpawn = 0; }
+  const arenaHeight = catchArena.clientHeight;
+  const basketRect = catchBasket.getBoundingClientRect();
+  const arenaRect = catchArena.getBoundingClientRect();
+  const basketLeft = basketRect.left - arenaRect.left;
+  const basketRight = basketLeft + basketRect.width;
+  falling = falling.filter(item => {
+    item.y += item.speed * dt;
+    item.el.style.top = `${item.y}px`;
+    const itemX = arenaRect.width * item.x / 100;
+    if (item.y > arenaHeight - 72 && item.y < arenaHeight - 20 && itemX > basketLeft - 14 && itemX < basketRight + 14) {
+      item.el.remove();
+      if (item.bomb) { lives--; catchMessage.textContent = "Oops! A cheeky bomb. Be careful!"; }
+      else { caught++; catchMessage.textContent = ["Lovely catch! ✨", "Another one for the birthday basket!", "You're on fire! 💖"][Math.floor(Math.random()*3)]; }
+      updateCatchHud();
+      if (caught >= CATCH_TARGET) { finishCatch(true); return false; }
+      if (lives <= 0) { finishCatch(false); return false; }
+      return false;
+    }
+    if (item.y > arenaHeight + 35) { item.el.remove(); return false; }
+    return true;
+  });
+  gameFrame = requestAnimationFrame(catchLoop);
+}
+function startCatchGame() {
+  if (catchRunning) return;
+  resetCatch();
+  catchRunning = true; lastFrame = 0; lastSpawn = 0;
+  startCatchBtn.classList.add("hidden");
+  catchMessage.textContent = "Go, go, go! Catch treats and dodge the bombs!";
+  gameFrame = requestAnimationFrame(catchLoop);
+  clockTick = setInterval(() => {
+    if (!catchRunning) return;
+    secondsLeft--; updateCatchHud();
+    if (secondsLeft <= 0) finishCatch(false);
+  }, 1000);
+}
+startCatchBtn.addEventListener("click", startCatchGame);
+openGalleryBtn.addEventListener("click", () => { if (catchWon) showScreen(gallerySection); });
+document.getElementById("backToBookFromGame").addEventListener("click", () => {
+  catchRunning = false; cancelAnimationFrame(gameFrame); clearInterval(clockTick); showScreen(bookSection);
+});
+
 // The scrapbook is one chapter of the experience, followed by a larger photo wall and a final keepsake note.
 const galleryJump = document.createElement("button");
 galleryJump.className = "button button-primary";
@@ -146,7 +255,16 @@ galleryJump.textContent = "Explore the photo wall ↗";
 galleryJump.style.display = "block";
 galleryJump.style.margin = "24px auto 0";
 document.querySelector(".book-controls").after(galleryJump);
-galleryJump.addEventListener("click", () => showScreen(gallerySection));
+galleryJump.addEventListener("click", () => {
+    if (QA_SKIP_CATCH_GAME) {
+    showScreen(gallerySection);
+    return;
+  }
+  resetCatch();
+  startCatchBtn.classList.remove("hidden");
+  startCatchBtn.textContent = "Start the game ✦";
+  showScreen(secondGame);
+});
 document.getElementById("galleryBack").addEventListener("click", () => showScreen(bookSection));
 document.getElementById("galleryNext").addEventListener("click", () => showScreen(capsuleSection));
 document.getElementById("capsuleCelebrate").addEventListener("click", () => {
@@ -183,8 +301,7 @@ candleScene.addEventListener("click", blowCandles);
 document.getElementById("closeBirthday").addEventListener("click", () => birthdayOverlay.classList.add("hidden"));
 birthdayOverlay.addEventListener("click", e => { if (e.target === birthdayOverlay) birthdayOverlay.classList.add("hidden"); });
 
-// Show the birthday candle moment once the visitor has entered the scrapbook.
-openBookBtn.addEventListener("click", () => setTimeout(openBirthday, 450));
+// The candle moment is intentionally reserved for the final step after the gallery and memory capsule.
 
 // A small canvas ambient animation: floating petals, sparkles, and confetti.
 const canvas = document.getElementById("ambientCanvas"), ctx = canvas.getContext("2d");
