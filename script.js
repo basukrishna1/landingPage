@@ -1,5 +1,5 @@
 // Personalize this page before sharing it.
-const FRIEND_NAME = "YOUR FRIEND";
+const FRIEND_NAME = "Anusha";
 
 // QA / local testing only:
 // Add ?skipGame=1 to the URL to bypass the memory game and open the scrapbook.
